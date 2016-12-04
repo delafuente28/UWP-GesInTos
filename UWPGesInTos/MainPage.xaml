@@ -1,0 +1,135 @@
+﻿<Page
+    x:Class="UWPGesInTos.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGesInTos"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:MyToolkit.Controls"
+    xmlns:viewModel="using:UWPGesInTos.ViewModels"
+    xmlns:delegates="using:UWPGesInTos.Delegates"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <delegates:Delegates></delegates:Delegates>
+    </Page.DataContext>
+
+
+
+    <Grid Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <RelativePanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock TextAlignment="Center" Grid.Column="0" FontSize="40">GesInTos</TextBlock>
+
+                <Button Grid.Column="1" Background="AliceBlue" Command="{Binding ConfigCommand}">
+                    <Image Source="/Images/config.png" Height="24" Width="24" />
+                </Button>
+
+            </Grid>
+        </RelativePanel>
+
+        <RelativePanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+
+                <StackPanel BorderThickness="5" Background="Red" Grid.Column="0" Grid.Row="0" Margin="20">
+                    <Button HorizontalAlignment="Center" Background="SkyBlue" Command="{Binding ExpensesCommand}">
+                        <RelativePanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Image Grid.Row="0" Margin="10" Source="/Images/expense-48.png" Height="48" Width="48" />
+                                <TextBlock Grid.Row="1" Foreground="White">
+                                    Expenses
+                                </TextBlock>
+                            </Grid>
+                        </RelativePanel>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel BorderThickness="5" Background="Red" Grid.Column="1" Grid.Row="0" Margin="20">
+                    <Button HorizontalAlignment="Center" Background="SkyBlue" Command="{Binding IncomesCommand}">
+                        <RelativePanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Image Grid.Row="0" Margin="10" Source="/Images/income-48.png" Height="48" Width="48" />
+                                <TextBlock Grid.Row="1" Foreground="White">
+                                    Incomes
+                                </TextBlock>
+                            </Grid>
+                        </RelativePanel>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel BorderThickness="5" Background="Red" Grid.Column="0" Grid.Row="1" Margin="20">
+                    <Button HorizontalAlignment="Center" Background="SkyBlue" Command="{Binding ProfitsCommand}">
+                        <RelativePanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Image Grid.Row="0" Margin="10" Source="/Images/profits-48.png" Height="48" Width="48" />
+                                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="White">
+                                    Profits
+                                </TextBlock>
+                            </Grid>
+                        </RelativePanel>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel BorderThickness="5" Background="Red" Grid.Column="1" Grid.Row="1" Margin="20">
+                    <Button HorizontalAlignment="Center" Background="SkyBlue" Command="{Binding StatisticsCommand}">
+                        <RelativePanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Image Grid.Row="0" Margin="10" Source="/Images/analytics-48.png" Height="48" Width="48" />
+                                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="White">
+                                    Statistics
+                                </TextBlock>
+                            </Grid>
+                        </RelativePanel>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+        </RelativePanel>
+
+        <RelativePanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <TextBlock FontSize="12">Jose Antonio de la Fuente Brando 2016</TextBlock>
+        </RelativePanel>
+    </Grid>
+
+</Page>

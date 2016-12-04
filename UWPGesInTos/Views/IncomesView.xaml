@@ -1,0 +1,249 @@
+﻿<Page
+    x:Class="UWPGesInTos.Views.IncomesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGesInTos.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:UWPGesInTos.ViewModels"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:currency="using:UWPGesInTos.Converters"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <currency:CurrencyConverter x:Key="CurrencyConverter"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+
+        <RelativePanel Grid.Row="0" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Grid.Column="0">UWP GesInTos - Incomes</TextBlock>
+                <Button Grid.Column="1" HorizontalAlignment="Right" Background="White" Command="{Binding Delegates.MainViewCommand}">
+                    <Image Source="/Images/Home.png" Height="32" Width="32" />
+                </Button>
+            </Grid>
+        </RelativePanel>
+
+        <!-- Ribbon Menu -->
+
+        <RelativePanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Orientation = "Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,5">
+                <StackPanel Margin="5,0,0,0">
+                    <Button HorizontalAlignment="Center" Background="White" Command="{Binding Delegates.ExpensesCommand}">
+                        <Image Source="/Images/expense-48.png" Height="32" Width="32" />
+                    </Button>
+                    <TextBlock HorizontalAlignment="Center">
+                        Expenses
+                    </TextBlock>
+                </StackPanel>
+                <AppBarSeparator/>
+                <StackPanel HorizontalAlignment="Center" Margin="5,0,0,0">
+                    <Button HorizontalAlignment="Center" Background="White" Command="{Binding Delegates.IncomesCommand}">
+                        <Image Source="/Images/income-48.png" Height="32" Width="32" />
+                    </Button>
+                    <TextBlock HorizontalAlignment="Center">
+                        Incomes
+                    </TextBlock>
+                </StackPanel>
+                <AppBarSeparator/>
+                <StackPanel Margin="5,0,0,0">
+                    <Button HorizontalAlignment="Center" Background="White" Command="{Binding Delegates.ProfitsCommand}">
+                        <Image Source="/Images/profits-48.png" Height="32" Width="32" />
+                    </Button>
+                    <TextBlock HorizontalAlignment="Center">
+                        Profits
+                    </TextBlock>
+                </StackPanel>
+                <AppBarSeparator/>
+                <StackPanel Margin="5,0,0,0">
+                    <Button HorizontalAlignment="Center" Background="White" Command="{Binding Delegates.StatisticsCommand}">
+                        <Image Source="/Images/analytics-48.png" Height="32" Width="32" />
+                    </Button>
+                    <TextBlock HorizontalAlignment="Center">
+                        Statistics
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </RelativePanel>
+
+        <!-- New Income -->
+
+        <RelativePanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Margin="5,5,5,0" Grid.Column="0" Text="Search:" />
+                <TextBox Text="{Binding Searching, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120" Grid.Column="1" />
+
+                <Button Margin="35,0,0,0" Grid.Column="2" Content="New Income" Command="{Binding Delegates.IncomesPopupCommand}" FontSize="14"></Button>
+            </Grid>
+        </RelativePanel>
+
+        <!-- ListView -->
+
+        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Enabled">
+            <StackPanel>
+                <ListView Name="IIncomes" ItemsSource="{Binding IIncomes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      SelectionMode="Single"
+                      IsItemClickEnabled="True"
+                      SelectionChanged="IIncomes_SelectionChanged"
+                      SelectedItem="{Binding SelectedIncome, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <RelativePanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Concept}" 
+                                    Margin="20,0,20,8"
+                                    FontSize="20" 
+                                    FontStyle="Italic" 
+                                    FontWeight="SemiBold"
+                                    Foreground="DarkBlue" />
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding TypeIncome}" 
+                                    Margin="20,0,20,8"
+                                    FontSize="16"
+                                    Foreground="DarkGray" 
+                                    Opacity="0.8" />
+                                    <TextBlock Grid.RowSpan="2" Grid.Column="1" Text="{Binding Amount, Converter={StaticResource CurrencyConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    Margin="20,0,20,8"
+                                    FontSize="16" 
+                                    FontStyle="Italic" 
+                                    FontWeight="SemiBold"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black" />
+                                </Grid>
+                            </RelativePanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Detail Income -->
+
+        <RelativePanel Grid.Row="3" Name="DetailIncome" Visibility="Collapsed" Width="Auto" Height="Auto" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <RelativePanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                    <TextBlock FontSize="32" FontWeight="ExtraBold">Detail</TextBlock>
+                </RelativePanel>
+
+                <RelativePanel Grid.Row="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Concept:" FontSize="18" Grid.Row="0" FontWeight="ExtraBold" />
+                        <TextBlock Text="{Binding SelectedIncome.Concept, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" Grid.Row="1" />
+                    </Grid>
+                </RelativePanel>
+
+                <RelativePanel Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Margin="2" Grid.Column="0" Text="Amount:" FontSize="18" FontWeight="ExtraBold" />
+                        <TextBlock Margin="2" Grid.Column="1" TextAlignment="Center" Text="{Binding SelectedIncome.Amount ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  />
+
+                        <TextBlock Margin="2" Grid.Column="2" Text="Date:" FontSize="18" FontWeight="ExtraBold" />
+                        <TextBlock Grid.Column="3" Text="{Binding SelectedIncome.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" />
+                    </Grid>
+                </RelativePanel>
+
+                <RelativePanel Grid.Row="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Type:" FontSize="18" FontWeight="ExtraBold" />
+                        <TextBlock Grid.Column="1" TextAlignment="Center" Text="{Binding DescriptionSelectedIncome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" />
+
+                    </Grid>
+                </RelativePanel>
+
+                <RelativePanel Grid.Row="4">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Description:" FontSize="18" FontWeight="ExtraBold" />
+                        <TextBlock Grid.Row="1" Text="{Binding SelectedIncome.Description}" FontSize="18" />
+                    </Grid>
+                </RelativePanel>
+
+                <RelativePanel Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" Name="Back_IncomeDetail" Content="Back" Width="120" Command="{Binding Delegates.BackToIncomeCommand}" />
+                        <Button Margin="1" Grid.Column="1" Content="Delete Income" Command="{Binding DeleteSelectedIncomeCommand}" FontSize="14"></Button>
+                    </Grid>
+
+                </RelativePanel>
+
+            </Grid>
+        </RelativePanel>
+
+        <!-- Footer -->
+
+        <RelativePanel Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="16" Margin="0,0,0.333,0" Width="207">
+            <TextBlock FontSize="12">Jose Antonio de la Fuente Brando 2016</TextBlock>
+        </RelativePanel>
+
+    </Grid>
+</Page>

@@ -1,0 +1,105 @@
+﻿<Page
+    x:Class="UWPGesInTos.Views.ProfitsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGesInTos.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:UWPGesInTos.ViewModels"
+    xmlns:Charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        
+        <RelativePanel Grid.Row="0" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Center" Grid.Column="0">UWP GesInTos - Profits</TextBlock>
+                <Button Grid.Column="1" HorizontalAlignment="Right" Background="White" Command="{Binding Delegates.MainViewCommand}">
+                    <Image Source="/Images/Home.png" Height="32" Width="32" />
+                </Button>
+            </Grid>
+        </RelativePanel>
+
+        <!-- Ribbon Menu -->
+        
+        <RelativePanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Orientation = "Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,5">
+                <StackPanel Margin="5,0,0,0">
+                    <Button HorizontalAlignment="Center" Background="White" Command="{Binding Delegates.ExpensesCommand}">
+                        <Image Source="/Images/expense-48.png" Height="32" Width="32" />
+                    </Button>
+                    <TextBlock HorizontalAlignment="Center">
+                        Expenses
+                    </TextBlock>
+                </StackPanel>
+                <AppBarSeparator/>
+                <StackPanel HorizontalAlignment="Center" Margin="5,0,0,0">
+                    <Button HorizontalAlignment="Center" Background="White" Command="{Binding Delegates.IncomesCommand}">
+                        <Image Source="/Images/income-48.png" Height="32" Width="32" />
+                    </Button>
+                    <TextBlock HorizontalAlignment="Center">
+                        Incomes
+                    </TextBlock>
+                </StackPanel>
+                <AppBarSeparator/>
+                <StackPanel Margin="5,0,0,0">
+                    <Button HorizontalAlignment="Center" Background="White" Command="{Binding Delegates.ProfitsCommand}">
+                        <Image Source="/Images/profits-48.png" Height="32" Width="32" />
+                    </Button>
+                    <TextBlock HorizontalAlignment="Center">
+                        Profits
+                    </TextBlock>
+                </StackPanel>
+                <AppBarSeparator/>
+                <StackPanel Margin="5,0,0,0">
+                    <Button HorizontalAlignment="Center" Background="White" Command="{Binding Delegates.StatisticsCommand}">
+                        <Image Source="/Images/analytics-48.png" Height="32" Width="32" />
+                    </Button>
+                    <TextBlock HorizontalAlignment="Center">
+                        Statistics
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </RelativePanel>
+
+        <!-- Chart -->
+
+        <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+           
+            <Charting:Chart x:Name="ColumnChart" Width="Auto" Height="Auto">
+                <Charting:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding Profits}" IsSelectionEnabled="True" Title="€/Month" />
+            </Charting:Chart>
+        
+        </Grid>
+        
+        <!--<StackPanel Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <Charting:Chart x:Name="ColumnChart" Width="Auto" Height="480">
+                <Charting:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding Profits}" IsSelectionEnabled="True" Title="€/Month" />
+            </Charting:Chart>
+
+        </StackPanel>-->
+
+        <!-- Footer -->
+
+        <RelativePanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="16" Margin="0,0,0.333,0" Width="207">
+            <TextBlock FontSize="12">Jose Antonio de la Fuente Brando 2016</TextBlock>
+        </RelativePanel>
+
+    </Grid>
+</Page>
