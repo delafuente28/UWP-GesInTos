@@ -13,6 +13,7 @@ namespace UWPGesInTos.ViewModels
     /// </summary>
     public class ConfigViewModel
     {
+
         #region FIELDS
 
         private string _databaseName;

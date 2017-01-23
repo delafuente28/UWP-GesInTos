@@ -1,11 +1,11 @@
 ﻿{
   "dependencies": {
-    "Microsoft.ApplicationInsights": "1.2.3",
+    "Microsoft.ApplicationInsights": "2.2.0",
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.2.3",
     "Microsoft.ApplicationInsights.WindowsApps": "1.1.1",
     "Microsoft.CodeAnalysis.CSharp": "2.0.0-beta1",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
-    "MyToolkit.Extended": "2.5.13",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "MyToolkit.Extended": "2.5.16",
     "Prism.Windows": "6.0.2",
     "SQLite.Net-PCL": "3.1.1",
     "WindowsAppStudio.Uwp": "1.5.3",
