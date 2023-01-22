@@ -6,10 +6,6 @@ You can download UWP-GesInTos v1.0.0.0 for Windows 10 x64 from the next URL: htt
 
 Jose Antonio de la Fuente Brando
 
-Personal website: http://delafuentebrando.es
-
 Linkedin: https://www.linkedin.com/in/joseantoniodelafuentebrando
-
-Twitter: https://twitter.com/delafuente_28
 
 Github: https://github.com/delafuente28
